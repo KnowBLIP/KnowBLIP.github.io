@@ -67,6 +67,16 @@
         }
         th {
             background-color: #f2f2f2;
+            cursor: pointer;
+        }
+        .buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -78,7 +88,7 @@
         </div>
         <div class="section">
             <h2>Abstract</h2>
-            <p>Currently, Large Visual Language Models (LVLMs) have integrated various tasks, and some \emph{``any2any''} models have emerged, enabling support for diverse modalities for input and various output formats, thereby expanding the impact of LVLMs. However, we discover a common issue —the generated content do not align with the objective facts of the real world — we refer to as \emph{``A gap with world knowledge''}. Furthermore, the poor performance of text generation ($\leq$25\% ) and image generation ($\leq$5\% ) tasks around world knowledge validate that existing ``any2any'' models rely on imagining rather than understanding world to generate content. In this paper, we develop a comprehensive multi-modal benchmark to foster a close connection between ``any2any'' LVLMs and the real world. Specifically, we have collected a dataset, IWK-300k, of multi-modal objective knowledge derived from reasoning on multi-modal knowledge graphs, characterized by interleaved, multi-turn, and multi-lingual attributes. Furthermore, we have developed a KnowBLIP, capable of accommodating various input and output paradigms based on IWK-300k dataset. Our KnowBLIP outperformed 8 leading baselines, such as GPT-4V and Qwen-VL, setting a new record for state-of-the-art performance in downstream multi-modal tasks.</p>
+            <p>Currently, Large Visual Language Models (LVLMs) have integrated various tasks, and some ``any2any'' models have emerged, enabling support for diverse modalities for input and various output formats, thereby expanding the impact of LVLMs. However, we note that existing models remain incomplete and distant from real-world applicability, primarily due to two key factors: partial functionality and lack of connection with world knowledge. Firstly, we stress the importance of a comprehensive LVLM that accommodates various input and output paradigms, which should be interleaved, multi-turn, and multi-lingual. However, there is no multi-modal framework capable of fully encompassing all functionalities. Moreover, textual knowledge often lacks substantial connections with the visible objective world, resulting in visual and language alignment limited to the semantic level, detached from objective facts. This limitation leads to models generated primarily through imagination rather than a grounded understanding of the world. To bridge the gap between LVLMs and the visible real world, we propose a novel multi-modal framework, KnowBLIP, designed to support a comprehensive, world-grounded, ``any2any'' paradigm. Specifically, we have collected a dataset, IWK-500k, of multi-modal objective knowledge derived from reasoning on multi-modal knowledge graphs, characterized by interleaved, multi-turn, and multi-lingual attributes. Furthermore, we have developed the KnowBLIP, capable of accommodating various input and output paradigms based on IWK-500k dataset. Extensive experiments have demonstrated the effectiveness of our approach.</p>
         </div>
         <hr>
         <div class="section">
@@ -90,19 +100,194 @@
         <div class="section">
             <h2>Leaderboard</h2>
             <p>We evaluate various models including LLMs and LMMs. In each type, we consider both closed- and open-source models. Our evaluation is conducted under a zero-shot setting to assess the capability of models to generate accurate answers without fine-tuning or few-shot demonstrations on our benchmark. For all models, we use the default prompt provided by each model for multi-choice or open QA, if available. If models do not provide prompts for task types in MMU, we conduct prompt engineering on the validation set and use the most effective prompt for the later zero-shot experiment.</p>
-            <table>
+            <div class="buttons">
+                <button onclick="showTable('zeroShot')">Zero-Shot</button>
+                <button onclick="showTable('mixedTrained')">Mixed-Trained</button>
+                <button onclick="showTable('individualTrained')">Individual-Trained</button>
+            </div>
+            <table id="leaderboardTable">
                 <thead>
                     <tr>
-                        <th>Model</th>
-                        <th>Text2Text Acc</th>
-                        <th>Image2Text Acc</th>
-                        <th>Text2Image R@1</th>
-                        <th>Text2Image R@5</th>
-                        <th>Image2Image R@1</th>
-                        <th>Image2Image R@5</th>
+                        <th onclick="sortTable(0)">Model</th>
+                        <th onclick="sortTable(1)">Text2Text Acc</th>
+                        <th onclick="sortTable(2)">Image2Text Acc</th>
+                        <th onclick="sortTable(3)">Text2Image R@1</th>
+                        <th onclick="sortTable(4)">Text2Image R@5</th>
+                        <th onclick="sortTable(5)">Image2Image R@1</th>
+                        <th onclick="sortTable(6)">Image2Image R@5</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="zeroShot">
+                    <tr>
+                        <td>VisualGLM</td>
+                        <td>8.54%</td>
+                        <td>7.53%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen-VL</td>
+                        <td>14.57%</td>
+                        <td>12.56%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>MiniGPTV2</td>
+                        <td>12.06%</td>
+                        <td>1.50%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>GILL</td>
+                        <td>8.10%</td>
+                        <td>11.75%</td>
+                        <td>0.00%</td>
+                        <td>2.95%</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TextBind</td>
+                        <td>18.20%</td>
+                        <td>21.02%</td>
+                        <td>2.98%</td>
+                        <td>4.13%</td>
+                        <td>2.21%</td>
+                        <td>4.70%</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-1.5-7B</td>
+                        <td>6.09%</td>
+                        <td>10.20%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>CogVLM-chat-v1.1</td>
+                        <td>14.45%</td>
+                        <td>17.41%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-4V</td>
+                        <td>61.53%</td>
+                        <td>55.88%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Gemini-1.5-pro</td>
+                        <td>56.41%</td>
+                        <td>41.53%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+                <tbody id="mixedTrained" style="display:none">
+                    <!-- Mixed-Trained data goes here -->
+                    <!-- Use the same data as zeroShot for demonstration -->
+                    <tr>
+                        <td>VisualGLM</td>
+                        <td>8.54%</td>
+                        <td>7.53%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen-VL</td>
+                        <td>14.57%</td>
+                        <td>12.56%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>MiniGPTV2</td>
+                        <td>12.06%</td>
+                        <td>1.50%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>GILL</td>
+                        <td>8.10%</td>
+                        <td>11.75%</td>
+                        <td>0.00%</td>
+                        <td>2.95%</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>TextBind</td>
+                        <td>18.20%</td>
+                        <td>21.02%</td>
+                        <td>2.98%</td>
+                        <td>4.13%</td>
+                        <td>2.21%</td>
+                        <td>4.70%</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-1.5-7B</td>
+                        <td>6.09%</td>
+                        <td>10.20%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>CogVLM-chat-v1.1</td>
+                        <td>14.45%</td>
+                        <td>17.41%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-4V</td>
+                        <td>61.53%</td>
+                        <td>55.88%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Gemini-1.5-pro</td>
+                        <td>56.41%</td>
+                        <td>41.53%</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+                <tbody id="individualTrained" style="display:none">
+                    <!-- Individual-Trained data goes here -->
+                    <!-- Use the same data as zeroShot for demonstration -->
                     <tr>
                         <td>VisualGLM</td>
                         <td>8.54%</td>
@@ -189,17 +374,63 @@
         </div>
         <hr>
         <div class="section">
-        <h2>Case Study</h2>
-        <p>The four formats of the IWK-300K dataset endow KnowBLIP with a diverse array of functionalities, enabling it to handle a wide range of tasks and scenarios related to real world knowledge. To illustrate these capabilities, we present several concrete user cases.</p>
-        <div class="framework-images">
-            <img src="./kuancase11.jpg" alt="Framework image 1">
-            <img src="./kuancase22.jpg" alt="Framework image 2">
-            <img src="./kuancase33.jpg" alt="Framework image 3">
-            <img src="./kuancase44.jpg" alt="Framework image 1">
-            <img src="./kuancase55.jpg" alt="Framework image 2">
-            <img src="./kuancase66.jpg" alt="Framework image 3">
-        </div>
+            <h2>CaseStudy</h2>
+            <p>The four formats of the IWK-300K dataset endow KnowBLIP with a diverse array of functionalities, enabling it to handle a wide range of tasks and scenarios related to real world knowledge. To illustrate these capabilities, we present several concrete user cases.</p>
+            <div class="framework-images">
+                <img src="./kuancase11.jpg" alt="Framework image 1">
+                <img src="./kuancase22.jpg" alt="Framework image 2">
+                <img src="./kuancase33.jpg" alt="Framework image 3">
+                <img src="./kuancase44.jpg" alt="Framework image 1">
+                <img src="./kuancase55.jpg" alt="Framework image 2">
+                <img src="./kuancase66.jpg" alt="Framework image 3">
+            </div>
         </div>
     </div>
+    <script>
+        function showTable(tableId) {
+            const tables = document.querySelectorAll('tbody');
+            tables.forEach(table => {
+                table.style.display = 'none';
+            });
+            document.getElementById(tableId).style.display = '';
+        }
+
+        function sortTable(n) {
+            const table = document.getElementById("leaderboardTable");
+            let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            switching = true;
+            dir = "asc"; 
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
