@@ -53,29 +53,23 @@
             background-image: linear-gradient(to right, #ccc, #333, #ccc);
             margin-bottom: 40px;
         }
-        .cite {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .cite pre {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 5px;
-            display: inline-block;
-            text-align: left;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>KnowBLIP: Large Vision-Language Models meet Interleaved World Knowledge</h1>
         <div class="links">
-            <a href="#">Paper</a> | <a href="#">Code and Dataset</a>
+            <a href="https://drive.google.com/drive/folders/1ZgfApnIhzXg8n3R_kwikix5C0Klv6UP8?usp=drive_link">Dataset</a>
         </div>
         <div class="section">
             <h2>Abstract</h2>
             <p>Currently, Large Visual Language Models (LVLMs) have integrated various tasks, and some ``any2any'' models have emerged, enabling support for diverse modalities for input and various output formats, thereby expanding the impact of LVLMs. However, we note that existing models remain incomplete and distant from real-world applicability, primarily due to two key factors: partial functionality and lack of connection with world knowledge. Firstly, we stress the importance of a comprehensive LVLM that accommodates various input and output paradigms, which should be interleaved, multi-turn, and multi-lingual. However, there is no multi-modal framework capable of fully encompassing all functionalities. Moreover, textual knowledge often lacks substantial connections with the visible objective world, resulting in visual and language alignment limited to the semantic level, detached from objective facts. This limitation leads to models generated primarily through imagination rather than a grounded understanding of the world. To bridge the gap between LVLMs and the visible real world, we propose a novel multi-modal framework, KnowBLIP, designed to support a comprehensive, world-grounded, ``any2any'' paradigm. Specifically, we have collected a dataset, IWK-500k, of multi-modal objective knowledge derived from reasoning on multi-modal knowledge graphs, characterized by interleaved, multi-turn, and multi-lingual attributes. Furthermore, we have developed the KnowBLIP, capable of accommodating various input and output paradigms based on IWK-500k dataset. Extensive experiments have demonstrated the effectiveness of our approach.</p>
-
+        </div>
+        <hr>
+        <div class="section">
+            <h2>Framework</h2>
+            <p>To bridge the gap between LVLMs and the visible real world, we propose a novel multi-modal framework, KnowBLIP, designed to support a comprehensive, world-grounded, ``any2any'' paradigm.</p>
+            <img src="./framework.png" alt="Dataset images">
         </div>
         <hr>
         <div class="section">
@@ -89,25 +83,6 @@
                 <img src="./kuancase55.jpg" alt="Framework image 2">
                 <img src="./kuancase66.jpg" alt="Framework image 3">
             </div>
-        </div>
-        <hr>
-        <div class="section">
-            <h2>Framework</h2>
-            <p>To bridge the gap between LVLMs and the visible real world, we propose a novel multi-modal framework, KnowBLIP, designed to support a comprehensive, world-grounded, ``any2any'' paradigm.</p>
-            <img src="./framework.png" alt="Dataset images">
-        </div>
-        <div class="cite">
-            <h2>Cite</h2>
-            <pre>
-@misc{fang2024signlm,
-  title={SignLM: Sign Language Production Large Language Models},
-  author={Sen Fang and Lei Wang and Ce Zheng and Yapeng Tian and Chen Chen},
-  year={2024},
-  eprint={2405.10718},
-  archivePrefix={arXiv},
-  primaryClass={cs.CV}
-}
-            </pre>
         </div>
     </div>
 </body>
