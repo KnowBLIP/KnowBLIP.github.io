@@ -102,7 +102,7 @@
         <hr>
     <div class="section">
         <h2>Leaderboard</h2>
-        <p>We evaluate various models including LLMs and LMMs. In each type, we consider both closed- and open-source models. Our evaluation is conducted under a zero-shot setting to assess the capability of models to generate accurate answers without fine-tuning or few-shot demonstrations on our benchmark. For all models, we use the default prompt provided by each model for multi-choice or open QA, if available. If models do not provide prompts for task types in MMU, we conduct prompt engineering on the validation set and use the most effective prompt for the later zero-shot experiment.</p>
+        <p>We begin by conducting robustness experiments (i.e. zero-shot testing) on the baselines, followed by an overall comparison of the trained baselines on IWK-300K.</p>
         <div class="buttons">
             <button onclick="showTable('zeroShot')">Zero-Shot</button>
             <button onclick="showTable('trained')">Trained</button>
