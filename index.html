@@ -97,193 +97,206 @@
             <img src="./framework.png" alt="Dataset images">
         </div>
         <hr>
-        <div class="section">
-            <h2>Leaderboard</h2>
-            <p>We evaluate various models including LLMs and LMMs. In each type, we consider both closed- and open-source models. Our evaluation is conducted under a zero-shot setting to assess the capability of models to generate accurate answers without fine-tuning or few-shot demonstrations on our benchmark. For all models, we use the default prompt provided by each model for multi-choice or open QA, if available. If models do not provide prompts for task types in MMU, we conduct prompt engineering on the validation set and use the most effective prompt for the later zero-shot experiment.</p>
-            <div class="buttons">
-                <button onclick="showTable('zeroShot')">Zero-Shot</button>
-                <button onclick="showTable('trained')">Trained</button>
-            </div>
-            <table id="leaderboardTable">
-                <thead>
-                    <tr>
-                        <th onclick="sortTable(0)">Model</th>
-                        <th onclick="sortTable(1)">Text2Text Acc</th>
-                        <th onclick="sortTable(2)">Image2Text Acc</th>
-                        <th onclick="sortTable(3)">Text2Image R@1</th>
-                        <th onclick="sortTable(4)">Text2Image R@5</th>
-                        <th onclick="sortTable(5)">Image2Image R@1</th>
-                        <th onclick="sortTable(6)">Image2Image R@5</th>
-                    </tr>
-                </thead>
-                <tbody id="zeroShot">
-                    <tr>
-                        <td>VisualGLM</td>
-                        <td>8.54%</td>
-                        <td>7.53%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen-VL</td>
-                        <td>14.57%</td>
-                        <td>12.56%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>MiniGPTV2</td>
-                        <td>12.06%</td>
-                        <td>1.50%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>GILL</td>
-                        <td>8.10%</td>
-                        <td>11.75%</td>
-                        <td>0.00%</td>
-                        <td>2.95%</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>TextBind</td>
-                        <td>18.20%</td>
-                        <td>21.02%</td>
-                        <td>2.98%</td>
-                        <td>4.13%</td>
-                        <td>2.21%</td>
-                        <td>4.70%</td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-1.5-7B</td>
-                        <td>6.09%</td>
-                        <td>10.20%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>CogVLM-chat-v1.1</td>
-                        <td>14.45%</td>
-                        <td>17.41%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>GPT-4V</td>
-                        <td>61.53%</td>
-                        <td>55.88%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Gemini-1.5-pro</td>
-                        <td>56.41%</td>
-                        <td>41.53%</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
-                </tbody>
-                <tbody id="trained" style="display:none">
-                    <tr>
-                        <td>VisualGLM</td>
-                        <td>16.75%</td>
-                        <td>15.32%</td>
-                        <td>4.32%</td>
-                        <td>6.45%</td>
-                        <td>3.21%</td>
-                        <td>5.67%</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen-VL</td>
-                        <td>22.45%</td>
-                        <td>20.56%</td>
-                        <td>5.67%</td>
-                        <td>7.89%</td>
-                        <td>4.32%</td>
-                        <td>6.78%</td>
-                    </tr>
-                    <tr>
-                        <td>MiniGPTV2</td>
-                        <td>18.32%</td>
-                        <td>10.45%</td>
-                        <td>3.21%</td>
-                        <td>5.43%</td>
-                        <td>2.34%</td>
-                        <td>4.56%</td>
-                    </tr>
-                    <tr>
-                        <td>GILL</td>
-                        <td>15.67%</td>
-                        <td>18.45%</td>
-                        <td>4.56%</td>
-                        <td>6.78%</td>
-                        <td>3.45%</td>
-                        <td>5.89%</td>
-                    </tr>
-                    <tr>
-                        <td>TextBind</td>
-                        <td>25.32%</td>
-                        <td>28.45%</td>
-                        <td>6.78%</td>
-                        <td>8.90%</td>
-                        <td>5.67%</td>
-                        <td>7.89%</td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-1.5-7B</td>
-                        <td>12.45%</td>
-                        <td>15.67%</td>
-                        <td>3.21%</td>
-                        <td>5.43%</td>
-                        <td>2.34%</td>
-                        <td>4.56%</td>
-                    </tr>
-                    <tr>
-                        <td>CogVLM-chat-v1.1</td>
-                        <td>20.45%</td>
-                        <td>23.67%</td>
-                        <td>5.43%</td>
-                        <td>7.65%</td>
-                        <td>4.32%</td>
-                        <td>6.54%</td>
-                    </tr>
-                    <tr>
-                        <td>GPT-4V</td>
-                        <td>70.32%</td>
-                        <td>65.45%</td>
-                        <td>8.90%</td>
-                        <td>10.32%</td>
-                        <td>7.89%</td>
-                        <td>9.45%</td>
-                    </tr>
-                    <tr>
-                        <td>Gemini-1.5-pro</td>
-                        <td>65.45%</td>
-                        <td>50.32%</td>
-                        <td>7.65%</td>
-                        <td>9.87%</td>
-                        <td>6.54%</td>
-                        <td>8.32%</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="section">
+        <h2>Leaderboard</h2>
+        <p>We evaluate various models including LLMs and LMMs. In each type, we consider both closed- and open-source models. Our evaluation is conducted under a zero-shot setting to assess the capability of models to generate accurate answers without fine-tuning or few-shot demonstrations on our benchmark. For all models, we use the default prompt provided by each model for multi-choice or open QA, if available. If models do not provide prompts for task types in MMU, we conduct prompt engineering on the validation set and use the most effective prompt for the later zero-shot experiment.</p>
+        <div class="buttons">
+            <button onclick="showTable('zeroShot')">Zero-Shot</button>
+            <button onclick="showTable('trained')">Trained</button>
         </div>
+        <table id="zeroShotTable" class="display">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Text2Text Acc</th>
+                    <th>Image2Text Acc</th>
+                    <th>Text2Image R@1</th>
+                    <th>Text2Image R@5</th>
+                    <th>Image2Image R@1</th>
+                    <th>Image2Image R@5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>VisualGLM</td>
+                    <td>8.54%</td>
+                    <td>7.53%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Qwen-VL</td>
+                    <td>14.57%</td>
+                    <td>12.56%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>MiniGPTV2</td>
+                    <td>12.06%</td>
+                    <td>1.50%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>GILL</td>
+                    <td>8.10%</td>
+                    <td>11.75%</td>
+                    <td>0.00%</td>
+                    <td>2.95%</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>TextBind</td>
+                    <td>18.20%</td>
+                    <td>21.02%</td>
+                    <td>2.98%</td>
+                    <td>4.13%</td>
+                    <td>2.21%</td>
+                    <td>4.70%</td>
+                </tr>
+                <tr>
+                    <td>LLaVA-1.5-7B</td>
+                    <td>6.09%</td>
+                    <td>10.20%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>CogVLM-chat-v1.1</td>
+                    <td>14.45%</td>
+                    <td>17.41%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>GPT-4V</td>
+                    <td>61.53%</td>
+                    <td>55.88%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Gemini-1.5-pro</td>
+                    <td>56.41%</td>
+                    <td>41.53%</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+        <table id="trainedTable" class="display" style="display:none">
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Text2Text Acc</th>
+                    <th>Image2Text Acc</th>
+                    <th>Text2Image R@1</th>
+                    <th>Text2Image R@5</th>
+                    <th>Image2Image R@1</th>
+                    <th>Image2Image R@5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>VisualGLM</td>
+                    <td>16.75%</td>
+                    <td>15.32%</td>
+                    <td>4.32%</td>
+                    <td>6.45%</td>
+                    <td>3.21%</td>
+                    <td>5.67%</td>
+                </tr>
+                <tr>
+                    <td>Qwen-VL</td>
+                    <td>22.45%</td>
+                    <td>20.56%</td>
+                    <td>5.67%</td>
+                    <td>7.89%</td>
+                    <td>4.32%</td>
+                    <td>6.78%</td>
+                </tr>
+                <tr>
+                    <td>MiniGPTV2</td>
+                    <td>18.32%</td>
+                    <td>10.45%</td>
+                    <td>3.21%</td>
+                    <td>5.43%</td>
+                    <td>2.34%</td>
+                    <td>4.56%</td>
+                </tr>
+                <tr>
+                    <td>GILL</td>
+                    <td>15.67%</td>
+                    <td>18.45%</td>
+                    <td>4.56%</td>
+                    <td>6.78%</td>
+                    <td>3.45%</td>
+                    <td>5.89%</td>
+                </tr>
+                <tr>
+                    <td>TextBind</td>
+                    <td>25.32%</td>
+                    <td>28.45%</td>
+                    <td>6.78%</td>
+                    <td>8.90%</td>
+                    <td>5.67%</td>
+                    <td>7.89%</td>
+                </tr>
+                <tr>
+                    <td>LLaVA-1.5-7B</td>
+                    <td>12.45%</td>
+                    <td>15.67%</td>
+                    <td>3.21%</td>
+                    <td>5.43%</td>
+                    <td>2.34%</td>
+                    <td>4.56%</td>
+                </tr>
+                <tr>
+                    <td>CogVLM-chat-v1.1</td>
+                    <td>20.45%</td>
+                    <td>23.67%</td>
+                    <td>5.43%</td>
+                    <td>7.65%</td>
+                    <td>4.32%</td>
+                    <td>6.54%</td>
+                </tr>
+                <tr>
+                    <td>GPT-4V</td>
+                    <td>70.32%</td>
+                    <td>65.45%</td>
+                    <td>8.90%</td>
+                    <td>10.32%</td>
+                    <td>7.89%</td>
+                    <td>9.45%</td>
+                </tr>
+                <tr>
+                    <td>Gemini-1.5-pro</td>
+                    <td>65.45%</td>
+                    <td>50.32%</td>
+                    <td>7.65%</td>
+                    <td>9.87%</td>
+                    <td>6.54%</td>
+                    <td>8.32%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
         <hr>
         <div class="section">
             <h2>CaseStudy</h2>
@@ -298,49 +311,21 @@
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
-        function showTable(tableId) {
-            const tables = document.querySelectorAll('tbody');
-            tables.forEach(table => {
-                table.style.display = 'none';
-            });
-            document.getElementById(tableId).style.display = '';
-        }
+        $(document).ready(function() {
+            $('#zeroShotTable').DataTable();
+            $('#trainedTable').DataTable();
+        });
 
-        function sortTable(n) {
-            const table = document.getElementById("leaderboardTable");
-            let rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            switching = true;
-            dir = "asc"; 
-            while (switching) {
-                switching = false;
-                rows = table.rows;
-                for (i = 1; i < (rows.length - 1); i++) {
-                    shouldSwitch = false;
-                    x = rows[i].getElementsByTagName("TD")[n];
-                    y = rows[i + 1].getElementsByTagName("TD")[n];
-                    if (dir == "asc") {
-                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    } else if (dir == "desc") {
-                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                            shouldSwitch = true;
-                            break;
-                        }
-                    }
-                }
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchcount++;
-                } else {
-                    if (switchcount == 0 && dir == "asc") {
-                        dir = "desc";
-                        switching = true;
-                    }
-                }
+        function showTable(tableId) {
+            if (tableId === 'zeroShot') {
+                $('#zeroShotTable').show();
+                $('#trainedTable').hide();
+            } else if (tableId === 'trained') {
+                $('#zeroShotTable').hide();
+                $('#trainedTable').show();
             }
         }
     </script>
