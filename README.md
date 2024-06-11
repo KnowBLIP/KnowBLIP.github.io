@@ -1,6 +1,7 @@
 # [KnowBLIP: Large Vision-Language Models meet Interleaved World Knowledge]
 
-This is our data for the paper: [1048] [KnowBLIP: Large Vision-Language Models meet Interleaved World Knowledge].
+This is our data for the paper: 
+[KnowBLIP: Large Vision-Language Models meet Interleaved World Knowledge].
 
 ## IWK-300K
 1. Full single-turn conversation data is released in the following
